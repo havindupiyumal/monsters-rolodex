@@ -1,6 +1,7 @@
 import './App.css';
 import React,{Component} from 'react';
-import button from 'react-dom';
+
+import {SearchBox} from './components/search-box/search-box.component';
 
 class App extends Component {
   constructor(){
@@ -30,24 +31,43 @@ class App extends Component {
     this.setState({monsters: []});
   }
 
+  filterMonsters = (monsters, searchFeild) => {
+    return monsters.filter((monster)=>  monster.name.toLocaleLowerCase().includes(searchFeild.toLocaleLowerCase()));
+  }
+
+  onSearchFeildChange = (event) => {
+    const searchFeild = event.target.value.toLocaleLowerCase();
+    this.setState({searchFeild})
+  }
 
   render(){
 
-    let monsterLoadButton;
+    const {monsters, searchFeild} = this.state;
+    const {onSearchFeildChange, filterMonsters, clearMonsters, loadMonsters} = this;
 
+
+    let monsterLoadButton;
     if(this.state.monsters.length === 0){
-      monsterLoadButton = <button onClick={()=>this.loadMonsters()}>Load Monsters</button>
+      monsterLoadButton = <button onClick={()=>loadMonsters()}>Load Monsters</button>
     }
 
     return(
       <div className='App'>
-        <h1>Monsters</h1>
+        <h1>Monsters Rolodex</h1>
+        {/* <SearchBox {...this.state}  /> */}
+        <input className='search-box' 
+        type="search" 
+        placeholder='Search Monsters' 
+        onChange={onSearchFeildChange}
+         />
+        
         {
-          this.state.monsters.map((monster)=>{
-            return (<p key={monster.id} >{monster.name + monster.phone}</p>)
+          filterMonsters(monsters, searchFeild).map((monster)=>{
+            return (<h1 key={monster.id} >{monster.name + " " + monster.phone}</h1>)
           })
         }
-        <button onClick={()=>this.clearMonsters()}>Clear Monsters</button><br/><br/>
+
+        <button onClick={()=>clearMonsters()}>Clear Monsters</button><br/><br/>
         {monsterLoadButton}
       </div>
     );
