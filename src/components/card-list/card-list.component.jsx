@@ -1,5 +1,9 @@
 import React from 'react';
 
-export const CardList = () => {
-    return(<h1>Card List</h1>)
+import {Card} from '../card/card.compoenent';
+
+export const CardList = ({monsters}) => {
+    return(
+        monsters.map((monster) => <Card monster={monster} />)
+    )
 }

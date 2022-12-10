@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Card = () => {
-    return(<h1>Card</h1>)
+export const Card = ({monster}) => {
+    return(<h1 key={monster.id} >{monster.name + " " + monster.phone}</h1>)
 }

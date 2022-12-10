@@ -2,6 +2,7 @@ import './App.css';
 import React,{Component} from 'react';
 
 import {SearchBox} from './components/search-box/search-box.component';
+import {CardList} from './components/card-list/card-list.component'
 
 class App extends Component {
   constructor(){
@@ -51,6 +52,8 @@ class App extends Component {
       monsterLoadButton = <button onClick={()=>loadMonsters()}>Load Monsters</button>
     }
 
+    let filteredMonsters = filterMonsters(monsters, searchFeild);
+
     return(
       <div className='App'>
         <h1>Monsters Rolodex</h1>
@@ -60,12 +63,7 @@ class App extends Component {
         placeholder='Search Monsters' 
         onChange={onSearchFeildChange}
          />
-        
-        {
-          filterMonsters(monsters, searchFeild).map((monster)=>{
-            return (<h1 key={monster.id} >{monster.name + " " + monster.phone}</h1>)
-          })
-        }
+        <CardList monsters={filteredMonsters} />
 
         <button onClick={()=>clearMonsters()}>Clear Monsters</button><br/><br/>
         {monsterLoadButton}
