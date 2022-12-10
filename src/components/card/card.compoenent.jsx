@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export const Card = ({monster}) => {
-    return(<h1 key={monster.id} >{monster.name + " " + monster.phone}</h1>)
+export class Card extends Component {
+
+    render(){
+        const {monster} = this.props;
+        return(<h1 key={monster.id} >{monster.name + " " + monster.phone}</h1>)
+    }
+
+    
 }
