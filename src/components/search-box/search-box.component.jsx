@@ -5,7 +5,7 @@ class SearchBox extends Component{
 
     render(){
         return(<>
-            <input type='text' name='searchbox' />
+            <input placeholder='Search Monsters' type='text' name='searchbox' />
         </>);
     }
 

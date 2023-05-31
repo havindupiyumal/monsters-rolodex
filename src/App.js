@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import SearchBox from "./components/SearchBox/SearchBox.component";
+import SearchBox from "./components/search-box/search-box.component";
 
 class App extends Component {
   constructor() {
@@ -26,14 +26,7 @@ class App extends Component {
     const { monsters } = this.state;
 
     return (
-      <div
-        className="App"
-        style={{
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <div className="App">
         <SearchBox />
 
         {monsters.map((monster) => {
