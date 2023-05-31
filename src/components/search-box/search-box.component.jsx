@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-// import './SearchBox.styles.scss';
+import React from 'react';
+import './search-box.styles.scss';
 
-class SearchBox extends Component{
+const SearchBox = ({onSearchFieldChange}) => {
 
-    render(){
-        return(<>
-            <input placeholder='Search Monsters' type='text' name='searchbox' />
-        </>);
-    }
+    return(<input className='search-box' placeholder='Search Monsters' type='text' name='searchbox' onChange={onSearchFieldChange} />)
 
 }
 
