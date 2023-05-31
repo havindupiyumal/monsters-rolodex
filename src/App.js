@@ -1,24 +1,48 @@
 import React, { Component } from "react";
+import "./App.css";
+
+import SearchBox from "./components/SearchBox/SearchBox.component";
 
 class App extends Component {
   constructor() {
     super();
+
     this.state = {
-      name: "Havindu",
+      monsters: [],
     };
   }
 
-  onButtonClick = (event) => {
-    this.setState({ name: "Havindu Dissanayake" });
-  };
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) => {
+        this.setState({
+          monsters: users,
+        });
+      });
+  }
 
   render() {
-    const { name } = this.state;
+    const { monsters } = this.state;
 
     return (
-      <div className="App">
-        <h1>Hello World {name}</h1>
-        <button onClick={this.onButtonClick}>View Full Name</button>
+      <div
+        className="App"
+        style={{
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <SearchBox />
+
+        {monsters.map((monster) => {
+          return (
+            <div key={monster.id}>
+              <h1>{monster.name}</h1>
+            </div>
+          );
+        })}
       </div>
     );
   }
