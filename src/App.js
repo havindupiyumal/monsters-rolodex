@@ -6,6 +6,7 @@ import { CardList } from "./components/card-list/card-list.component";
 
 const App = () => {
   const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [searchField, setSearchField] = useState("");
 
   const loadMonsters = () => {
@@ -16,20 +17,20 @@ const App = () => {
       });
   };
 
-  const onSearchFieldChangeHandler = (event) =>
-    setSearchField(event.target.value.toLocaleLowerCase());
-
-  const filterMonsters = (monsters, searchField) => {
-    return monsters.filter((monster) =>
-      monster.name.toLocaleLowerCase().includes(searchField)
-    );
-  };
-
   useEffect(() => {
     loadMonsters();
   });
 
-  const filteredMonsters = filterMonsters(monsters, searchField);
+  const onSearchFieldChangeHandler = (event) =>
+    setSearchField(event.target.value.toLocaleLowerCase());
+
+  useEffect(() => {
+    setFilteredMonsters(
+      monsters.filter((monster) =>
+        monster.name.toLocaleLowerCase().includes(searchField)
+      )
+    );
+  }, [searchField, monsters]);
 
   return (
     <div className="App">
